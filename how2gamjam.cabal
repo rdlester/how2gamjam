@@ -1,0 +1,16 @@
+Name:     how2gamjam
+Version:  1.0
+Cabal-Version:  >=1.2
+License:        MIT
+License-file:   LICENSE
+Author:         Ryan Lester
+Homepage:       https://github.com/rdlester/how2gamjam
+Synopsis:       Twitter bot.
+Build-Type:     Simple
+
+Executable run-how2gamjam
+  Build-Depends:  base, twitter-conduit
+  Main-Is:        Main.hs
+  Hs-Source-Dirs: .
+
+
