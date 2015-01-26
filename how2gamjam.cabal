@@ -9,7 +9,12 @@ Synopsis:       Twitter bot.
 Build-Type:     Simple
 
 Executable run-how2gamjam
-  Build-Depends:  base, twitter-conduit
+  Build-Depends:
+    base
+    , twitter-conduit
+    , parsec
+    , authenticate-oauth
+    , bytestring
   Main-Is:        Main.hs
   Hs-Source-Dirs: .
 
