@@ -33,6 +33,7 @@ def getCorpus():
         text = re.sub(urlRE, '', text)
         f.write(text)
         f.write('\n')
+      print('Search saved.')
   except TwythonError as e:
     print(e)
     pass
