@@ -11,16 +11,18 @@ Build-Type:     Simple
 Executable run-how2gamjam
   Build-Depends:
     base
+    , aeson
     , authenticate-oauth
     , bytestring
     , conduit
     , http-conduit
     , lens
     , parsec
+    , resourcet
+    , text
     , transformers
     , twitter-conduit
+    , twitter-types
     , twitter-types-lens
   Main-Is:        Main.hs
   Hs-Source-Dirs: .
-
-
