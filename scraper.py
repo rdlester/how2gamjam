@@ -13,7 +13,7 @@ OAUTH_SECRET = os.getenv('OAUTH_SECRET')
 twitter = Twython(API_KEY, API_SECRET, OAUTH_KEY, OAUTH_SECRET)
 
 urlRE = re.compile(r'https?:\/\/[^\s\r\n]*')
-RTRE = r'^RT @[^:]+:'
+RTRE = r'^RT @\w+:'
 
 # rate limit is 180, get as close to that as possible
 queryDelay = 6
