@@ -14,7 +14,6 @@ access-tokens.json
 
 *.pyc
 data/
-tokenizers/
 venv/
 
 .DS_Store
