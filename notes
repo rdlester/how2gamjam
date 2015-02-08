@@ -1,0 +1,19 @@
+first: scraper.py -> cleaner.py -> runMarkov.py
+  scraper:
+    - #gamedev is a lot of self promotion.
+    - progressively searching backwards during search works up to point where twitter stops returning tweets. how do i detect this to automatically stop scraping?
+    - ~40,000 tweets total.
+  cleaner:
+    - exclude RTs to limit duplication.
+    - should take care with @ replies.
+    - totally exclude #tags? exclude tweets that are just #tags?
+    - initial run cut corpus down to ~20,000 (50%). still too many to do final manual cleaning pass.
+  runMarkov.py:
+    - using nltk punkt tokenizer works better than simple whitespace tokenizer. too bad there's no haskell implementation around.
+    - initially wasn't using cleaned corpus. don't forget that.
+  results:
+    - it's okay. markov is always kinda jumk and self-promo all-hashtag tweets don't help.
+  next:
+    - scrape different tag / query to expand corpus?
+    - write generative grammar based off patterns in #gamedev?
+    - skip text gen and go straight to screenshot gen, game gen.

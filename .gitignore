@@ -10,6 +10,11 @@ cabal-dev
 cabal.sandbox.config
 cabal.config
 access-tokens
+access-tokens.json
 
 *.pyc
 data/
+tokenizers/
+venv/
+
+.DS_Store

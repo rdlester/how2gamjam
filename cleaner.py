@@ -3,15 +3,19 @@ import os
 import re
 import sys
 
-corpusFileName = 'pastCorpus.txt'
-cleanedCorpusName = 'cleanCorpus.txt'
+corpusFileName = 'data/pastCorpus.txt'
+cleanedCorpusName = 'data/cleanCorpus-noHashtags.txt'
 
 # remove weirdly formatted manual RTs, note those kleene stars, no +
-RTre = re.compile('^(RT\s*)?\w*:')
+rtRe = re.compile('^(RT\s*)?\w*:')
+
+# who is tweeting this junk
+dstRe = re.compile(r'(\#DaylightSavingsTime)|(\#DaylightSavingTime)')
 
 # drop hashtags that occur at end of line
 # Q: drop these entirely? clear sign of obnoxious #relevant game tweets
-hashtagre = re.compile(r'(\s*[\-\–]\s*)?(\#\w+\s+)+$')
+startHashtagRe = re.compile(r'^(\#\w+\s+){2,}')
+endHashtagRe = re.compile(r'(\s*[\-\–]\s*)?(\#\w+\s*)+$')
 
 def cleanCorpus():
   with open(corpusFileName, mode='r') as fraw:
@@ -23,13 +27,26 @@ def cleanCorpus():
         fclean.write(line)
         fclean.write('\n')  # does line already contain \n?
 
+# returns cleaned line or None if line should be excluded.
 def cleanLine(line):
-  if RTre.match(line) is not None:
+  # exclude offenders
+  if reCollide(rtRe, line) or reCollide(dstRe, line):
     return None
-  line = hashtagre.sub('', line)
+
+  #remove junk
+  line = startHashtagRe.sub('', line)
+  line = endHashtagRe.sub('', line)
+
+  # fix formatting
   line = line.replace('\n', '')
+  line = line.replace ('...', '')
   line = line.strip()
+
   return line
+
+# returns True is `re` is matched in `line`
+def reCollide(re, line):
+  return (re.search(line) is not None)
 
 if __name__ == '__main__':
   cleanCorpus()
