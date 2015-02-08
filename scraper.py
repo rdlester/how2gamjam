@@ -18,7 +18,7 @@ RTRE = r'^RT @\w+:'
 # rate limit is 180, get as close to that as possible
 queryDelay = 6
 
-saveFileName = 'pastCorpus.txt'
+saveFileName = 'data/corpus.txt'
 
 # scrapes upwards or downwards, excluding tweets.
 def getCorpus(max_id, since_id):

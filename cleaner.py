@@ -3,8 +3,8 @@ import os
 import re
 import sys
 
-corpusFileName = 'data/pastCorpus.txt'
-cleanedCorpusName = 'data/cleanCorpus-noHashtags.txt'
+corpusFileName = 'data/corpus.txt'
+cleanedCorpusName = 'data/cleanCorpus.txt'
 
 # remove weirdly formatted manual RTs, note those kleene stars, no +
 rtRe = re.compile('^(RT\s*)?\w*:')
