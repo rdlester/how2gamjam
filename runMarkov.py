@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from markov import MarkovGenerator, twitter_tokenize
+from ebook.markov import MarkovGenerator, twitter_tokenize
 
 if __name__ == "__main__":
   with open('data/cleanCorpus-noHashtags.txt', mode='r') as fin:

@@ -95,7 +95,7 @@ class MarkovGenerator(object):
         text = self.text
         ngram = self.ngram
         words = self.tokenize_fun(text)
-        zippy_words = zip(*[words[i:] for i in xrange(ngram + 1)])
+        zippy_words = zip(*[words[i:] for i in range(ngram + 1)])
         markov_dict = defaultdict(Counter)
         for t in zippy_words:
             a, b = t[:-1], t[-1]
@@ -112,7 +112,7 @@ class MarkovGenerator(object):
             for el in it:
                 total = func(total, el)
                 yield total
-        choices, weights = zip(*self.markov_dict[start_key].iteritems())
+        choices, weights = zip(*self.markov_dict[start_key].items())
         cumulative_distribution = list(accumulate(weights))
         rando = random.random() * cumulative_distribution[-1]
         return choices[bisect.bisect(cumulative_distribution, rando)]
@@ -131,7 +131,7 @@ class MarkovGenerator(object):
 
     def generate_words(self):
         '''generates tweet text'''
-        start_tup = random.choice(self.markov_dict.keys())
+        start_tup = random.choice(list(self.markov_dict.keys()))
         words_length = 0
         words_tuples = [start_tup]
         while words_length < self.length:
