@@ -65,9 +65,11 @@ def fix_hashtags(text):
 def fix_therest(text):
     '''hacky tool to replace other stuff that has
     been consistently wrong'''
-    gonna_hack = re.sub(r'gon na', r'gonna', text)
-    quote_hack = re.sub(r"“”“", r'', gonna_hack)
-    return quote_hack
+    nna_hack = re.sub(r'n na', r'nna', text)
+    quote_hack = re.sub(r"“”“", r'', nna_hack)
+    if quote_hack[0:2] == "'s":
+        clean = quote_hack[3:]
+    return clean
 
 
 def final_cleanup(text):
@@ -140,5 +142,5 @@ class MarkovGenerator(object):
             words_length += len(next_word) + 1
             words_tuples.append(next_tup)
         words_tuples.append(('.',))
-        self.generated_text = self.ngrams_to_words(words_tuples)
-        return final_cleanup(self.generated_text)
+        generated_text = self.ngrams_to_words(words_tuples)
+        return final_cleanup(generated_text)
