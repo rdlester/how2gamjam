@@ -34,7 +34,7 @@ def loadModel():
 
 def generateTweet():
   # TODO: this works but i should use a real distribution (?)
-  generator.length = min(20 + round(abs(gauss(0, 60))), 130)
+  generator.length = min(20 + round(abs(gauss(0, 75))), 130)
   tweet = generator.generate_words()
 
   # exclude undesired tweets
