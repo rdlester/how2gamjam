@@ -1,5 +1,5 @@
 import nose
-from lib.wordfilter import Wordfilter
+from ..lib.wordfilter import Wordfilter
 
 # Run with `python -m test.wordfilter_test`
 class Wordfilter_test:
