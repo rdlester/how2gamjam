@@ -64,4 +64,4 @@ if __name__ == '__main__':
     # tweet, log and delay
     twitter.update_status(status=tweet)
     print(time.strftime('[%y-%m-%dT%H:%M:%S] {}').format(tweet))
-    time.sleep(min_interval - log(random())) * (average_interval - min_interval)
+    time.sleep(min_interval - log(random()) * (average_interval - min_interval))
