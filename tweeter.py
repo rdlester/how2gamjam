@@ -17,7 +17,7 @@ OAUTH_SECRET = os.getenv('OAUTH_SECRET')
 twitter = Twython(API_KEY, API_SECRET, OAUTH_KEY, OAUTH_SECRET)
 
 # get rid of annoying trailing ands.
-andRe = re.compile(r'\s(and|the).$', re.I)
+andRe = re.compile(r'\s(and|the|a).$', re.I)
 
 generator = None
 wordfilter = Wordfilter()
