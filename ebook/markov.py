@@ -77,7 +77,7 @@ def fix_therest(text):
 def final_cleanup(text):
     '''run on generated text to do all cleanup'''
     clean = fix_apostrophes(fix_nt(fix_tco(fix_hashtags(fix_therest(text)))))
-    if clean[-2] == (' ' or '.'):
+    if len(clean) >= 2 and clean[-2] == (' ' or '.'):
         clean = clean[:-2] + '.'
     return clean
 
@@ -105,7 +105,7 @@ class MarkovGenerator(object):
         text = self.text
         ngram = self.ngram
         markov_dict = defaultdict(Counter)
-
+        
         for sentence in text:
             words = self.tokenize_fun(sentence)
             zippy_words = zip(*[words[i:] for i in range(ngram + 1)])
@@ -151,7 +151,6 @@ class MarkovGenerator(object):
         while words_length < self.length:
             next_word = self.choose_word(words_tuples[-1])
             if type(next_word) == EndToken:
-                print('Found end token.')
                 break
             next_tup = words_tuples[-1][1:] + (next_word,)
             words_length += len(next_word) + 1
