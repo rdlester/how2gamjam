@@ -28,14 +28,16 @@ average_interval = 10800
 def loadModel():
   global generator
   with open('data/cleanCorpus.txt') as f:
-    tweetCorpus = f.read()
+    tweetCorpusString = f.read()
+    tweetCorpus = tweetCorpusString.split('\n')
     generator = MarkovGenerator(tweetCorpus, 0, tokenize_fun=twitter_tokenize)
     print("model loaded")
 
 def generateTweet():
   # TODO: this works but i should use a real distribution (?)
-  generator.length = min(20 + round(abs(gauss(0, 75))), 130)
+  generator.length = 130 # min(20 + round(abs(gauss(0, 75))), 130)
   tweet = generator.generate_words()
+  print(tweet)
 
   # exclude undesired tweets
   if tweet.find('@') != -1:

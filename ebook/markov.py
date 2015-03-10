@@ -81,6 +81,12 @@ def final_cleanup(text):
         clean = clean[:-2] + '.'
     return clean
 
+class EndToken(object):
+    '''dumb token denoting the end of a sequence
+    '''
+    def __init__(self):
+        return
+
 
 class MarkovGenerator(object):
 
@@ -98,12 +104,16 @@ class MarkovGenerator(object):
         counting the number of times words follow an ngram'''
         text = self.text
         ngram = self.ngram
-        words = self.tokenize_fun(text)
-        zippy_words = zip(*[words[i:] for i in range(ngram + 1)])
         markov_dict = defaultdict(Counter)
-        for t in zippy_words:
-            a, b = t[:-1], t[-1]
-            markov_dict[a][b] += 1
+
+        for sentence in text:
+            words = self.tokenize_fun(sentence)
+            zippy_words = zip(*[words[i:] for i in range(ngram + 1)])
+            for t in zippy_words:
+                a, b = t[:-1], t[-1]
+                markov_dict[a][b] += 1
+            markov_dict[t[1:]][EndToken()] += 1
+
         return markov_dict
 
     def choose_word(self, start_key):
@@ -140,6 +150,9 @@ class MarkovGenerator(object):
         words_tuples = [start_tup]
         while words_length < self.length:
             next_word = self.choose_word(words_tuples[-1])
+            if type(next_word) == EndToken:
+                print('Found end token.')
+                break
             next_tup = words_tuples[-1][1:] + (next_word,)
             words_length += len(next_word) + 1
             words_tuples.append(next_tup)
