@@ -2,7 +2,7 @@
 from ebook.markov import MarkovGenerator, twitter_tokenize
 from math import log
 import os
-from random import gauss, random
+from random import randint
 import re
 import sys
 import time
@@ -23,6 +23,7 @@ generator = None
 wordfilter = Wordfilter()
 
 ngram = 3
+min_length = 25
 max_length = 130
 
 min_interval = 240
@@ -39,8 +40,11 @@ def loadModel():
 def generateTweet():
   generator.length = max_length
   tweet = generator.generate_words()
+  print(tweet)
 
   # exclude undesired tweets
+  if tweet == '.':
+    return None
   if tweet.find('@') != -1:
     return None
   if wordfilter.blacklisted(tweet):
@@ -57,11 +61,14 @@ if __name__ == '__main__':
     sys.exit("failure loading corpus")
 
   while True:
-    tweet = generateTweet()
+    # keep drawing sentences until this length is surpassed.
+    draw_until_length = min_length  # randint(min_length, max_length)
 
-    # immediately generate a new tweet if we failed
-    if tweet is None:
-      continue
+    tweet = ""
+    while len(tweet) <= draw_until_length:
+      new_sentence = generateTweet()
+      if new_sentence is not None:
+        tweet += new_sentence + ' '
 
     # tweet, log and delay
     twitter.update_status(status=tweet)
