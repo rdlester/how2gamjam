@@ -2,7 +2,7 @@
 from ebook.markov import MarkovGenerator, twitter_tokenize
 from math import log
 import os
-from random import randint
+from random import randint, random
 import re
 import sys
 import time
