@@ -40,7 +40,6 @@ def loadModel():
 def generateTweet():
   generator.length = max_length
   tweet = generator.generate_words()
-  print(tweet)
 
   # exclude undesired tweets
   if tweet == '.':
