@@ -27,7 +27,7 @@ min_length = 25
 max_length = 130
 
 min_interval = 240
-average_interval = 8040
+average_interval = 17000
 
 def loadModel():
   global generator
